@@ -1,1 +1,3 @@
-INSERT INTO TEST VALUES(1, 'Hello');
+INSERT INTO MEMBERS(FIRST_NAME, LAST_NAME, MAIL_ADDRESS) VALUES('John', 'Doe', 'john.doe@temp.com');
+INSERT INTO MEMBERS(FIRST_NAME, LAST_NAME, MAIL_ADDRESS) VALUES('Berry', 'Haze', 'berry.haze@temp.com');
+INSERT INTO MEMBERS(FIRST_NAME, LAST_NAME, MAIL_ADDRESS) VALUES('Edward', 'Link', 'adward.link@temp.com');
