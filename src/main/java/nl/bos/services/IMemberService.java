@@ -1,6 +1,7 @@
 package nl.bos.services;
 
 import nl.bos.models.Member;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 

@@ -13,16 +13,16 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * Created by bosa on 21-9-2017.
  */
-@RestController
+@RepositoryRestController
 @RequestMapping("/api")
 public class MemberController {
-//    @Autowired
-//    IMemberService memberService;
-//
-//    @GetMapping("/member/{id}")
-//    Member getMember(@PathVariable("id") final long id) {
-//        return memberService.findById(id);
-//    }
+    @Autowired
+    IMemberService memberService;
+
+    @GetMapping("/member/{id}")
+    Member getMember(@PathVariable("id") final long id) {
+        return memberService.findById(id);
+    }
 
     @RequestMapping("/")
     String defaultMapping() {
