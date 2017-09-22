@@ -1,7 +1,6 @@
 package nl.bos.services;
 
 import nl.bos.models.Member;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -11,4 +10,7 @@ import java.util.List;
 public interface IMemberService {
     Member findById(long id);
     List<Member> findByLastName(String lastName);
+    List<Member> findAll();
+    Member save(String firstName, String lastName, String mailAddress);
+    void deleteById(long id);
 }

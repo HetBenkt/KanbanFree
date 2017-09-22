@@ -23,6 +23,22 @@ public class MemberServiceImpl implements IMemberService {
 
     @Override
     public List<Member> findByLastName(String lastName) {
-        return memberRepository.findByLastName(lastName);
+        return memberRepository.findByLastNameIgnoreCase(lastName);
+    }
+
+    @Override
+    public List<Member> findAll() {
+        return memberRepository.findAll();
+    }
+
+    @Override
+    public Member save(String firstName, String lastName, String mailAddress) {
+        Member member = new Member(firstName, lastName, mailAddress);
+        return memberRepository.save(member);
+    }
+
+    @Override
+    public void deleteById(long id) {
+        memberRepository.delete(id);
     }
 }
