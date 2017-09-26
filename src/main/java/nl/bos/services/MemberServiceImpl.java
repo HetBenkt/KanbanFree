@@ -17,28 +17,8 @@ public class MemberServiceImpl implements IMemberService {
     private IMemberRepository memberRepository;
 
     @Override
-    public Member findById(long id) {
-        return memberRepository.findOne(id);
-    }
-
-    @Override
-    public List<Member> findByLastName(String lastName) {
-        return memberRepository.findByLastNameIgnoreCase(lastName);
-    }
-
-    @Override
-    public List<Member> findAll() {
-        return memberRepository.findAll();
-    }
-
-    @Override
-    public Member save(String firstName, String lastName, String mailAddress) {
-        Member member = new Member(firstName, lastName, mailAddress);
-        return memberRepository.save(member);
-    }
-
-    @Override
-    public void deleteById(long id) {
-        memberRepository.delete(id);
+    public Member getMySpecialMember() {
+        //return memberRepository.getMySpecialMember();
+        return new Member(); //TODO Create a custom method for Spring rest Data!
     }
 }
