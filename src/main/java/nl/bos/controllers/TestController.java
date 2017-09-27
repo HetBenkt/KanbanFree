@@ -36,7 +36,7 @@ public class TestController {
 
     @GetMapping(value = "/member", produces = APPLICATION_JSON)
     @ResponseBody ResponseEntity<Member> getMember() {
-        Member member = new Member("Test", "123", "test@123.org");
+        Member member = new Member("Nick", "pass", "USER", "Test", "123", "test@123.org");
         return new ResponseEntity<>(member, HttpStatus.OK);
     }
 

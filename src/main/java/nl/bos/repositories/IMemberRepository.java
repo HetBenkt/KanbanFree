@@ -11,5 +11,6 @@ import java.util.List;
  */
 public interface IMemberRepository extends CrudRepository<Member, Long> {
     List<Member> findByLastNameIgnoreCase(@Param("lastName") String lastName);
+    Member findByNickName(@Param("nickName") String nickName);
     List<Member> findAll();
 }
