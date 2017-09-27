@@ -15,14 +15,14 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/api/test")
-public class MemberController {
+public class TestController {
     public static final String APPLICATION_JSON = "application/json";
     @Autowired
     private IMemberService memberService;
 
     @GetMapping(value = "/string", produces = APPLICATION_JSON)
     @ResponseBody ResponseEntity<String> getString() {
-        return new ResponseEntity<String>("{  \"response\" : \"your string value\" }", HttpStatus.OK);
+        return new ResponseEntity<>("{  \"response\" : \"your string value\" }", HttpStatus.OK);
     }
 
     @GetMapping(value = "/map", produces = APPLICATION_JSON)
@@ -31,18 +31,18 @@ public class MemberController {
         map.put("key", "value");
         map.put("foo", "bar");
         map.put("aa", "bb");
-        return new ResponseEntity<HashMap>(map, HttpStatus.OK);
+        return new ResponseEntity<>(map, HttpStatus.OK);
     }
 
     @GetMapping(value = "/member", produces = APPLICATION_JSON)
     @ResponseBody ResponseEntity<Member> getMember() {
         Member member = new Member("Test", "123", "test@123.org");
-        return new ResponseEntity<Member>(member, HttpStatus.OK);
+        return new ResponseEntity<>(member, HttpStatus.OK);
     }
 
     @GetMapping(value = "/service", produces = APPLICATION_JSON)
     @ResponseBody ResponseEntity<List<Member>> getSpecialMember() {
         List<Member> members = memberService.getMySpecialMember();
-        return new ResponseEntity<List<Member>>(members, HttpStatus.OK);
+        return new ResponseEntity<>(members, HttpStatus.OK);
     }
 }
