@@ -8,5 +8,5 @@ import java.util.List;
  * Created by bosa on 21-9-2017.
  */
 public interface IMemberService {
-    Member getMySpecialMember();
+    List<Member> getMySpecialMember();
 }
