@@ -16,7 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/test")
 public class TestController {
-    public static final String APPLICATION_JSON = "application/json";
+    private static final String APPLICATION_JSON = "application/json";
     @Autowired
     private IMemberService memberService;
 

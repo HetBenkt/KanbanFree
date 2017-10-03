@@ -21,7 +21,7 @@ import java.util.Collection;
 @Component
 @Log
 public class MyAuthenticationSuccessHandler  implements AuthenticationSuccessHandler {
-    private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
+    private final RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
