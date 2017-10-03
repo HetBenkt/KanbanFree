@@ -13,20 +13,17 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Created by bosa on 27-9-2017.
+ * Created by bosa on 3-10-2017.
  */
 @Component
 @Log
-class MyAccessDeniedHandler implements AccessDeniedHandler {
-
+public class MyAccessDeniedHandler implements AccessDeniedHandler {
     @Override
     public void handle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AccessDeniedException e) throws IOException, ServletException {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         if (auth != null) {
-            log.info("User '" + auth.getName()
-                    + "' attempted to access the protected URL: "
-                    + httpServletRequest.getRequestURI());
+            log.info(String.format("User %s attempted to access the protected URL %s", auth.getName(), httpServletRequest.getRequestURL()));
         }
 
         httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/403");

@@ -19,5 +19,4 @@
 - A Nice logo
 - /boards implementation including the backend :)
 - Clean/categorize the templates pages
-- Orange coloring in the navigation and text is not fitting nicely
-- http://localhost:8080/h2 and http://localhost:8080/members is accessible with ROLE_USER
+- Can i also do this with a id path variable in the DefaultController: @GetMapping("/user/{id}")

@@ -1,5 +1,7 @@
 package nl.bos.config;
 
+import nl.bos.components.MyAccessDeniedHandler;
+import nl.bos.components.MyAuthenticationSuccessHandler;
 import nl.bos.models.Member;
 import nl.bos.repositories.IMemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import java.util.List;
 
@@ -17,9 +20,11 @@ import java.util.List;
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
-    private AccessDeniedHandler accessDeniedHandler;
+    private MyAccessDeniedHandler accessDeniedHandler;
     @Autowired
     private IMemberRepository memberRepository;
+    @Autowired
+    private MyAuthenticationSuccessHandler authenticationSuccessHandler;
 
     // roles admin allow to access /admin/**
     // roles user allow to access /user/**
@@ -30,18 +35,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/", "/home", "/features", "/pricing", "/press").permitAll()
-                .antMatchers("/admin/**").hasAnyRole("ADMIN")
+                .antMatchers("/admin/**", "/h2", "/members/**").hasAnyRole("ADMIN")
                 .antMatchers("/boards/**").hasAnyRole("USER")
                 .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .permitAll()
-                .and()
-                .logout()
-                .permitAll()
-                .and()
-                .exceptionHandling().accessDeniedHandler(accessDeniedHandler);
+                .and().formLogin().loginPage("/login").permitAll().successHandler(authenticationSuccessHandler)
+                .and().logout().permitAll()
+                .and().exceptionHandling().accessDeniedHandler(accessDeniedHandler);
 
         http.headers().frameOptions().disable();
     }
