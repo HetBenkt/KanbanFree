@@ -6,18 +6,22 @@ import nl.bos.repositories.IMemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * Created by bosa on 27-9-2017.
@@ -31,8 +35,8 @@ public class DefaultController {
     private IMemberRepository memberRepository;
     @Autowired
     protected AuthenticationManager authenticationManager;
-//    @Autowired
-//    protected InMemoryUserDetailsManager inMemoryUserDetailsManager;
+    @Autowired
+    protected InMemoryUserDetailsManager inMemoryUserDetailsManager;
 
     @GetMapping("")
     public String app() {
@@ -86,18 +90,22 @@ public class DefaultController {
 
     @PostMapping("/signup")
     public String register(@ModelAttribute Member member, HttpSession session) {
-        log.info("Register user and login");
+        //Save new user info in H2
         memberRepository.save(new Member(member.getNickName(), member.getPassword(), "user", member.getFirstName(), member.getLastName(), member.getMailAddress()));
 
-//        inMemoryUserDetailsManager.createUser(new User(member.getNickName(), member.getPassword(), new ArrayList<GrantedAuthority>()));
-//
-//        UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(member.getNickName(), member.getPassword());
-//        Authentication auth = authenticationManager.authenticate(authRequest);
-//        SecurityContext securityContext = SecurityContextHolder.getContext();
-//        securityContext.setAuthentication(auth);
-//
-//        session.setAttribute("SPRING_SECURITY_CONTEXT", securityContext);
+        //Add new user to Spring inMemomery Authentication
+        final Collection<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+        grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+        inMemoryUserDetailsManager.createUser(new User(member.getNickName(), member.getPassword(), grantedAuthorities));
 
+        //Direct login the user to the application
+        UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(member.getNickName(), member.getPassword());
+        Authentication auth = authenticationManager.authenticate(authRequest);
+        SecurityContext securityContext = SecurityContextHolder.getContext();
+        securityContext.setAuthentication(auth);
+        session.setAttribute("SPRING_SECURITY_CONTEXT", securityContext);
+
+        //Forward to the boards section
         return "/boards";
     }
 

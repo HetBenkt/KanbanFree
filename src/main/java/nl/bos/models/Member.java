@@ -49,5 +49,6 @@ public class Member {
     private String lastName;
 
     @Column(name = "MAIL_ADDRESS")
+    @NotEmpty
     private String mailAddress;
 }
