@@ -2,8 +2,8 @@
 <head>
     <div th:fragment="header-head">
         <title>KanbanFree</title>
-        <link rel="stylesheet" type="text/css" href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
-        <link rel="stylesheet" th:href="@{/css/main.css}" href="../../css/main.css" />
+        <link rel="stylesheet" type="text/css" href="../webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="/app/css/main.css" />
     </div>
 </head>
 <body>
@@ -16,23 +16,23 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" th:href="@{/}">KanbanFree</a>
+                <a class="navbar-brand" th:href="@{/app}">KanbanFree</a>
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
-                    <li><a th:href="@{/features}">Features</a></li>
-                    <li><a th:href="@{/pricing}">Pricing</a></li>
-                    <li><a th:href="@{/press}">Press</a></li>
+                    <li><a th:href="@{/app/features}">Features</a></li>
+                    <li><a th:href="@{/app/pricing}">Pricing</a></li>
+                    <li><a th:href="@{/app/press}">Press</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li sec:authorize="isAnonymous()"><a href="#"><span class="glyphicon glyphicon-user"></span> Sign up</a></li>
-                    <li sec:authorize="isAnonymous()"><a th:href="@{/boards}"><span class="glyphicon glyphicon-log-in"></span> Sign in</a></li>
+                    <li sec:authorize="isAnonymous()"><a th:href="@{/app/boards}"><span class="glyphicon glyphicon-log-in"></span> Sign in</a></li>
 
-                    <li sec:authorize="hasRole('ROLE_USER')"><a th:href="@{/boards}"> Boards</a></li>
-                    <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/admin}"> Admin</a></li>
+                    <li sec:authorize="hasRole('ROLE_USER')"><a th:href="@{/app/boards}"> Boards</a></li>
+                    <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/app/admin}"> Admin</a></li>
 
                     <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}"><span class="glyphicon glyphicon-log-out"></span> Sign out</a></li>
-                    <li sec:authorize="isAuthenticated()"><a th:href="@{/user}"><span sec:authentication="name"></span></a></li>
+                    <li sec:authorize="isAuthenticated()"><a th:href="@{/app/user}"><span sec:authentication="name"></span></a></li>
                 </ul>
             </div>
         </div>

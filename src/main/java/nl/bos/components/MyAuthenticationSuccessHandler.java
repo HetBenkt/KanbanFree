@@ -25,7 +25,7 @@ public class MyAuthenticationSuccessHandler  implements AuthenticationSuccessHan
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
-        String targetUrl = "/login";
+        String targetUrl = "/app/login";
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null) {
@@ -33,9 +33,9 @@ public class MyAuthenticationSuccessHandler  implements AuthenticationSuccessHan
             Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
             for (GrantedAuthority authority: authorities) {
                 if (authority.getAuthority().equals("ROLE_USER")) {
-                    targetUrl = "/boards";
+                    targetUrl = "/app/boards";
                 } else if(authority.getAuthority().equals("ROLE_ADMIN")) {
-                    targetUrl = "/admin";
+                    targetUrl = "/app/admin";
                 }
             }
         }

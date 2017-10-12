@@ -1,13 +1,14 @@
 # KanbanFree
 ##### Available URL's after startup
-- http://localhost:8080 (The hosting service)
-  - Username: admin
-  - Password: admin (see application.properties)
-- http://localhost:8080/h2 (H2 Database console)
-- http://localhost:8080/members (String CRUD Rest repository)
-- http://localhost:8080/profile (Spring Data Rest profile)
-- http://localhost:8080/api/test (Custom Rest endpoint)
-
+- http://localhost:8080 
+- http://localhost:8080/h2          (H2 Database console)
+- http://localhost:8080/members     (String CRUD Rest repository)
+- http://localhost:8080/profile     (Spring Data Rest profile)
+- http://localhost:8080/app         (KanbanFree UI)
+- http://localhost:8080/app/admin
+- http://localhost:8080/app/boards
+- http://localhost:8080/app/user
+- http://localhost:8080/api/test    (Custom Rest endpoint)
 
 # Todo list
 - Sign up page including functionality

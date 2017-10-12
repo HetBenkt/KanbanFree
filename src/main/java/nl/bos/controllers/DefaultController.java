@@ -2,14 +2,16 @@ package nl.bos.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Created by bosa on 27-9-2017.
  */
 @Controller
+@RequestMapping("/app")
 public class DefaultController {
-    @GetMapping("/")
-    public String start() {
+    @GetMapping("")
+    public String app() {
         return "/home";
     }
 
@@ -50,7 +52,7 @@ public class DefaultController {
 
     @GetMapping("/login")
     public String login() {
-        return "/login";
+        return "login";
     }
 
     @GetMapping("/403")
