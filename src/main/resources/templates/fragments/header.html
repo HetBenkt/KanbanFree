@@ -25,7 +25,7 @@
                     <li><a th:href="@{/app/press}">Press</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li sec:authorize="isAnonymous()"><a href="#"><span class="glyphicon glyphicon-user"></span> Sign up</a></li>
+                    <li sec:authorize="isAnonymous()"><a th:href="@{/app/signup}"><span class="glyphicon glyphicon-user"></span> Sign up</a></li>
                     <li sec:authorize="isAnonymous()"><a th:href="@{/app/boards}"><span class="glyphicon glyphicon-log-in"></span> Sign in</a></li>
 
                     <li sec:authorize="hasRole('ROLE_USER')"><a th:href="@{/app/boards}"> Boards</a></li>

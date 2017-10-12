@@ -21,3 +21,6 @@
 - /boards implementation including the backend :)
 - Clean/categorize the templates pages
 - Can i also do this with a id path variable in the DefaultController: @GetMapping("/user/{id}")
+
+https://stackoverflow.com/questions/25869260/how-can-i-add-users-to-the-inmemoryauthentication-builder-after-it-has-been-buil
+https://stackoverflow.com/questions/4664893/how-to-manually-set-an-authenticated-user-in-spring-security-springmvc

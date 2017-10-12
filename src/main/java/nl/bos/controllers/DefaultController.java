@@ -1,15 +1,39 @@
 package nl.bos.controllers;
 
+import lombok.extern.java.Log;
+import nl.bos.models.Member;
+import nl.bos.repositories.IMemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 
 /**
  * Created by bosa on 27-9-2017.
  */
 @Controller
+@Log
 @RequestMapping("/app")
 public class DefaultController {
+
+    @Autowired
+    private IMemberRepository memberRepository;
+    @Autowired
+    protected AuthenticationManager authenticationManager;
+//    @Autowired
+//    protected InMemoryUserDetailsManager inMemoryUserDetailsManager;
+
     @GetMapping("")
     public String app() {
         return "/home";
@@ -53,6 +77,28 @@ public class DefaultController {
     @GetMapping("/login")
     public String login() {
         return "login";
+    }
+
+    @GetMapping("/signup")
+    public String signup() {
+        return "signup";
+    }
+
+    @PostMapping("/signup")
+    public String register(@ModelAttribute Member member, HttpSession session) {
+        log.info("Register user and login");
+        memberRepository.save(new Member(member.getNickName(), member.getPassword(), "user", member.getFirstName(), member.getLastName(), member.getMailAddress()));
+
+//        inMemoryUserDetailsManager.createUser(new User(member.getNickName(), member.getPassword(), new ArrayList<GrantedAuthority>()));
+//
+//        UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(member.getNickName(), member.getPassword());
+//        Authentication auth = authenticationManager.authenticate(authRequest);
+//        SecurityContext securityContext = SecurityContextHolder.getContext();
+//        securityContext.setAuthentication(auth);
+//
+//        session.setAttribute("SPRING_SECURITY_CONTEXT", securityContext);
+
+        return "/boards";
     }
 
     @GetMapping("/403")
