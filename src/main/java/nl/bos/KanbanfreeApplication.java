@@ -1,8 +1,10 @@
 package nl.bos;
 
 import nl.bos.models.Board;
+import nl.bos.models.Card;
 import nl.bos.models.Member;
 import nl.bos.repositories.IBoardRepository;
+import nl.bos.repositories.ICardRepository;
 import nl.bos.repositories.IMemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -28,18 +30,24 @@ public class KanbanfreeApplication {
 	}
 
 	@Bean
-	CommandLineRunner initDate(IMemberRepository memberRepo, IBoardRepository boardRepo) {
+	CommandLineRunner initDate(IMemberRepository memberRepository, IBoardRepository boardRepository, ICardRepository cardRepository) {
 		return args -> {
 			Member testUser = new Member("testuser", "admin", "user", "test", "user", "test.user@local.com");
-			memberRepo.save(testUser);
+			memberRepository.save(testUser);
 			addInMemorySecurity(testUser);
+
 			Board testUserBoard1 = new Board("My first board", testUser);
 			Board testUserBoard2 = new Board("My second board", testUser);
-			boardRepo.save(testUserBoard1);
-			boardRepo.save(testUserBoard2);
+			boardRepository.save(testUserBoard1);
+			boardRepository.save(testUserBoard2);
+
+			Card testBoard1Card1 = new Card("My card", testUser, testUserBoard1);
+			Card testBoard1Card2 = new Card("My second card", testUser, testUserBoard1);
+			cardRepository.save(testBoard1Card1);
+			cardRepository.save(testBoard1Card2);
 
 			Member testAdmin = new Member("testadmin", "admin", "admin", "test", "admin", "test.admin@local.com");
-			memberRepo.save(testAdmin);
+			memberRepository.save(testAdmin);
 			addInMemorySecurity(testAdmin);
 		};
 	}

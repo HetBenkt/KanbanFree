@@ -1,39 +1,38 @@
 package nl.bos.models;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
-import java.util.List;
 
 /**
  * Created by bosa on 21-9-2017.
  */
 @Data
 @Entity
-@Table(name = "BOARDS")
-public class Board {
-    public Board() {
+@Table(name = "CARDS")
+public class Card {
+    public Card() {
     }
 
-    public Board(String name, Member member) {
-        this.name = name;
+    public Card(String title, Member member, Board board) {
+        this.title = title;
         this.member = member;
+        this.board = board;
     }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(name = "NAME")
+    @Column(name = "TITLE")
     @NotEmpty
-    private String name;
+    private String title;
 
     @OneToOne
     private Member member;
 
-    @OneToMany(mappedBy = "board")
-    List<Card> cards;
+    @OneToOne
+    private Board board;
+
 }
