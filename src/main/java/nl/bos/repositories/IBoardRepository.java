@@ -1,5 +1,6 @@
 package nl.bos.repositories;
 
+import nl.bos.models.Board;
 import nl.bos.models.Member;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -11,10 +12,7 @@ import java.util.List;
  * Created by bosa on 21-9-2017.
  */
 @RepositoryRestResource(exported = true)
-public interface IMemberRepository extends CrudRepository<Member, Long> {
-    List<Member> findByLastNameIgnoreCase(@Param("lastName") String lastName);
-    List<Member> findDistinctByBoardsNameContains(@Param("name") String name);
-    Member findByNickName(@Param("nickName") String nickName);
-
-    List<Member> findAll();
+public interface IBoardRepository extends CrudRepository<Board, Long> {
+    List<Board> findByNameIgnoreCase(@Param("name") String name);
+    List<Board> findAll();
 }

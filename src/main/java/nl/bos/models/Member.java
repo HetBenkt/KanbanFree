@@ -4,6 +4,7 @@ import lombok.Data;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by bosa on 21-9-2017.
@@ -51,4 +52,7 @@ public class Member {
     @Column(name = "MAIL_ADDRESS")
     @NotEmpty
     private String mailAddress;
+
+    @OneToMany(mappedBy = "member")
+    List<Board> boards;
 }
