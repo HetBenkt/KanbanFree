@@ -17,7 +17,6 @@
 - Admin console /admin
 - Add information on the info pages
 - Terms of Service | Privacy Policy text
-- A Nice logo
 - /boards implementation including the backend :)
 - Clean/categorize the templates pages
 - Can i also do this with a id path variable in the DefaultController: @GetMapping("/user/{id}")

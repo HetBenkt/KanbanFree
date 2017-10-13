@@ -23,5 +23,11 @@ h3 {
     text-decoration-color: orange;
 }
 nav {
-    background-color: white;
+    background-color: black;
+}
+li {
+    color: black;
+}
+a {
+    color: white;
 }
