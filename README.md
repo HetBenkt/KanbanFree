@@ -11,12 +11,14 @@
 - http://localhost:8080/api/test    (Custom Rest endpoint)
 
 # Todo list
+- /boards implementation including the backend :)
 - Start writing Test scripts in KanbanfreeApplicationTests
 - Password encryption
 - User preferences page /user
 - Admin console /admin
 - Add information on the info pages
 - Terms of Service | Privacy Policy text
-- /boards implementation including the backend :)
 - Clean/categorize the templates pages
 - Can i also do this with a id path variable in the DefaultController: @GetMapping("/user/{id}")
+- enable/disable users
+- board/{id} and card/{id} give a StackOverflow?
