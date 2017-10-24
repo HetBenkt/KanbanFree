@@ -1,8 +1,6 @@
 package nl.bos.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
@@ -11,7 +9,6 @@ import java.util.List;
 /**
  * Created by bosa on 21-9-2017.
  */
-@Data
 @Entity
 @Table(name = "BOARDS")
 public class Board {
@@ -23,17 +20,25 @@ public class Board {
         this.member = member;
     }
 
+    @Setter
+    @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @Setter
+    @Getter
     @Column(name = "NAME")
     @NotEmpty
     private String name;
 
+    @Setter
+    @Getter
     @OneToOne
     private Member member;
 
+    @Setter
+    @Getter
     @OneToMany(mappedBy = "board")
     List<Card> cards;
 }

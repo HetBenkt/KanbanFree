@@ -3,9 +3,9 @@ app.controller("myCtrl", function($scope, $http) {
     $scope.firstName = "John";
     $scope.lastName = "Doe";
 
-    $scope.myFunction = function() {
-        console.log('Get the boards');
-        $http.get('/members/1/boards')
+    $scope.myFunction = function(id) {
+        console.log('Get the boards for id: ' + id);
+        $http.get('/members/'+id+'/boards')
             .then(function(response) {
                 console.log(response)
             });

@@ -39,8 +39,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/", "/app", "/app/features", "/app/pricing", "/app/press", "/app/login", "/app/signup", "/webjars/**", "/app/css/**", "/app/js/**", "/login", "/api/test/**").permitAll()
-                .antMatchers("/app/admin/**", "/h2", "/members/**", "/boards/**", "/profile/**").hasAnyRole("ADMIN")
+                .antMatchers("/", "/members/**", "/app", "/app/features", "/app/pricing", "/app/press", "/app/login", "/app/signup", "/webjars/**", "/app/css/**", "/app/js/**", "/login", "/api/test/**").permitAll()
+                .antMatchers("/app/admin/**", "/h2", "/boards/**", "/profile/**").hasAnyRole("ADMIN")
+                //.antMatchers("/members/{\\d+}/boards").access("hasAnyAuthority('ROLE_TOKENSAVED')")
                 .antMatchers("/app/boards/**").hasAnyRole("USER")
                 .anyRequest().authenticated()
                 .and().formLogin().loginPage("/app/login").permitAll().successHandler(authenticationSuccessHandler)

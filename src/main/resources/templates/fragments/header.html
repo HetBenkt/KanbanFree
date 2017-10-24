@@ -26,8 +26,8 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown" sec:authorize="hasRole('ROLE_USER')">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" ng-init="myFunction()">Page 1
-                            <span class="caret"></span></a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" th:attr="ng-init='myFunction( ' + ${session.currentMember.id} + ' )'">Page 1
+                                <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="#">Page 1-1</a></li>
                             <li><a href="#">Page 1-2</a></li>
@@ -41,7 +41,7 @@
                     <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/app/admin}"> Admin</a></li>
 
                     <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}"><span class="glyphicon glyphicon-log-out"></span> Sign out</a></li>
-                    <li sec:authorize="isAuthenticated()"><a th:href="@{/app/user}"><span sec:authentication="name"></span></a></li>
+                    <li sec:authorize="isAuthenticated()"><a th:href="@{/app/user}"><span sec:authentication="name"></span> [<span th:text="${session.currentMember.id}" th:unless="${session == null}"></span>]</a></li>
                 </ul>
             </div>
         </div>

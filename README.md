@@ -12,6 +12,7 @@
 
 # Todo list
 - /boards implementation including the backend :)
+- review the security as its not working fine yet!?
 - Start writing Test scripts in KanbanfreeApplicationTests
 - Password encryption
 - User preferences page /user
@@ -21,4 +22,3 @@
 - Clean/categorize the templates pages
 - Can i also do this with a id path variable in the DefaultController: @GetMapping("/user/{id}")
 - enable/disable users
-- board/{id} and card/{id} give a StackOverflow?

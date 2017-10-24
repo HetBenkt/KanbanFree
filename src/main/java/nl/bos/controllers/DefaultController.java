@@ -8,12 +8,15 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by bosa on 27-9-2017.
@@ -54,12 +58,16 @@ public class DefaultController {
     }
 
     @GetMapping("/user")
-    public String user() {
+    public String user(HttpSession session, @AuthenticationPrincipal UserDetails currentUser) {
+        Member currentMember = memberRepository.findByNickName(currentUser.getUsername());
+        session.setAttribute("currentMember", currentMember);
         return "/user";
     }
 
     @GetMapping("/boards")
-    public String boards() {
+    public String boards(HttpSession session, @AuthenticationPrincipal UserDetails currentUser) {
+        Member currentMember = memberRepository.findByNickName(currentUser.getUsername());
+        session.setAttribute("currentMember", currentMember);
         return "/boards";
     }
 
